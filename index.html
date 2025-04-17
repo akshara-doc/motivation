@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Motivation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .hero h2 {
+            color: #ff7e5f;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+        }
+        
+        .content-section h2 {
+            border-bottom: 2px solid #ff7e5f;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        
+        .quote-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .quote-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+        
+        .quote-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .quote-card blockquote {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .quote-card cite {
+            display: block;
+            text-align: right;
+            font-weight: bold;
+            color: #ff7e5f;
+        }
+        
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .video-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .video-card .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-card .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .video-info {
+            padding: 1rem;
+        }
+        
+        .video-info h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .video-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .resource-list {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .resource-list ul {
+            list-style: none;
+        }
+        
+        .resource-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .resource-list a {
+            color: #ff7e5f;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-list a:hover {
+            color: #feb47b;
+            text-decoration: underline;
+        }
+        
+        .add-content-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+        }
+        
+        button {
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #feb47b;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .quote-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Daily Motivation</h1>
+        <p>Inspiration to fuel your journey to success</p>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h2>Transform Your Mindset, Transform Your Life</h2>
+            <p>Welcome to your daily source of motivation, inspiration, and personal growth resources.</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>Motivational Quotes</h2>
+            <div class="quote-cards">
+                <div class="quote-card">
+                    <blockquote>"The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle."</blockquote>
+                    <cite>- Steve Jobs</cite>
+                </div>
+                <div class="quote-card">
+                    <blockquote>"Success is not final, failure is not fatal: It is the courage to continue that counts."</blockquote>
+                    <cite>- Winston Churchill</cite>
+                </div>
+                <div class="quote-card">
+                    <blockquote>"The future belongs to those who believe in the beauty of their dreams."</blockquote>
+                    <cite>- Eleanor Roosevelt</cite>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Motivational Videos</h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/g-jwWYX7Jlo" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Dream - Motivational Video</h3>
+                        <p>An inspiring compilation to help you pursue your dreams and overcome obstacles.</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/mgmVOuLgFB0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Never Give Up</h3>
+                        <p>A powerful reminder of the importance of perseverance and determination.</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/wnHW6o8WMas" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Make Today Count</h3>
+                        <p>Focus on taking action today to build the life you want.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Recommended Resources</h2>
+            <div class="resource-list">
+                <ul>
+                    <li><a href="https://www.ted.com/topics/motivation" target="_blank">TED Talks on Motivation</a> - Inspirational speeches from thought leaders</li>
+                    <li><a href="https://www.goodreads.com/shelf/show/motivation" target="_blank">Top Motivational Books</a> - Must-read books for personal development</li>
+                    <li><a href="https://www.mindtools.com/" target="_blank">Mind Tools</a> - Resources for professional and personal development</li>
+                    <li><a href="https://www.coursera.org/courses?query=motivation" target="_blank">Online Courses</a> - Learn about motivation and personal growth</li>
+                    <li><a href="https://www.success.com/" target="_blank">Success Magazine</a> - Articles and insights on success and achievement</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Add Your Own Motivation</h2>
+            <div class="add-content-form">
+                <form id="motivationForm">
+                    <div class="form-group">
+                        <label for="contentType">Content Type</label>
+                        <select id="contentType" name="contentType">
+                            <option value="quote">Quote</option>
+                            <option value="video">Video Link</option>
+                            <option value="story">Success Story</option>
+                            <option value="resource">Resource Link</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="title">Title/Author</label>
+                        <input type="text" id="title" name="title" placeholder="Enter title or author name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea id="content" name="content" placeholder="Enter your motivational content, link, or story"></textarea>
+                    </div>
+                    
+                    <button type="submit">Submit Content</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Stay motivated, stay focused, achieve greatness.</p>
+        <div class="social-links">
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">YouTube</a>
+        </div>
+        <p>&copy; 2025 Daily Motivation. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('motivationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const contentType = document.getElementById('contentType').value;
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            
+            // Simple validation
+            if (!title || !content) {
+                alert('Please fill out all fields');
+                return;
+            }
+            
+            // In a real application, you would send this data to a server
+            // For this demo, we'll just show an alert
+            alert('Thank you for your submission! In a real application, this would be saved to a database.');
+            
+            // Reset the form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
